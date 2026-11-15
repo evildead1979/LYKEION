@@ -81,6 +81,36 @@ h1 em{font-style:normal;color:var(--orange)}
 
 .note{color:var(--fg-2);font-size:clamp(12px,.8vw,15px);font-weight:500}
 
+/* ── 동적 효과 ── */
+/* 로고: 처음 열 때 블록이 하나씩 떨어져 끼워지고, 마우스를 올리면 그 블록만 들렸다 내려앉는다 */
+.lb{transform-box:fill-box;transform-origin:50% 100%;animation:drop .7s cubic-bezier(.3,1.5,.5,1) both;cursor:pointer}
+.lb:nth-child(2){animation-delay:.12s}.lb:nth-child(3){animation-delay:.24s}.lb:nth-child(4){animation-delay:.36s}
+@keyframes drop{0%{transform:translateY(-120%);opacity:0}60%{opacity:1}100%{transform:none}}
+.lb:hover{animation:hop .55s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes hop{0%{transform:none}40%{transform:translateY(-16%) rotate(-3deg)}70%{transform:translateY(2%) scaleY(.96)}100%{transform:none}}
+/* 어법 블록: 들어 올리면 스터드가 솟고 그림자가 생긴다 */
+.pt{transition:transform .22s cubic-bezier(.3,1.6,.5,1),box-shadow .22s}
+.pt::before,.pt::after{transition:transform .22s cubic-bezier(.3,1.6,.5,1)}
+.s1 .pt:hover{transform:translateY(-6px) rotate(-.6deg);box-shadow:inset 0 0 0 2px var(--ink),0 10px 0 -2px #C9CDD6,0 18px 24px -10px rgba(20,33,61,.45)}
+.s1 .pt:hover::before{transform:translateY(-4px)}.s1 .pt:hover::after{transform:translateY(-4px);transition-delay:.05s}
+.s1 .pt.ready:hover{transform:translateY(-8px) rotate(-.8deg);box-shadow:0 10px 0 -2px #C27C05,0 20px 28px -10px rgba(20,33,61,.5)}
+.pt.ready .go{transition:transform .2s}
+.pt.ready:hover .go{transform:translateX(4px)}
+.pt.ready{animation:glow 2.4s ease-in-out infinite}
+@keyframes glow{0%,100%{filter:none}50%{filter:brightness(1.08) drop-shadow(0 0 10px rgba(252,163,17,.55))}}
+/* 회차 머리: 그 회차 블록에 마우스가 있으면 밑줄이 주황으로 */
+.rno{transition:border-color .2s,color .2s}
+.round:hover .rno{border-color:var(--orange)}
+.s1 .round:hover .rno strong{color:var(--red)}
+.s2 .round:hover .rno strong{color:var(--orange)}
+/* 시즌 2 섞기 카드: 떠오르며 섞는 블록 칩이 차례로 튄다 */
+.mix{transition:transform .25s cubic-bezier(.3,1.6,.5,1),box-shadow .25s,background .25s}
+.mix:hover{transform:translateY(-6px);background:#2B3F6B;box-shadow:inset 0 0 0 2px var(--orange),0 18px 28px -12px rgba(0,0,0,.6)}
+.mix:hover .chip{animation:pop .45s cubic-bezier(.3,1.8,.5,1) both}
+.mix:hover .chip:nth-child(2){animation-delay:.08s}
+@keyframes pop{0%{transform:none}45%{transform:translateY(-7px) scale(1.08)}100%{transform:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
 @media (max-width:1100px){
   .hero,.board{grid-template-columns:1fr}
   .s1 .rounds{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -104,7 +134,7 @@ h1 em{font-style:normal;color:var(--orange)}
       <h1>외우던 영작에서,<br><em>조립하는</em> 영작으로.</h1>
       <p class="sub">블록 조립으로 완성하는 내신 서술형 · 토요일 3시간 · 기초반 · 실전반</p>
     </div>
-    <svg class="logo" id="logo" viewBox="0 0 640 210" role="img" aria-label="블록 영작"></svg>
+    <svg class="logo" id="logo" viewBox="0 -30 640 240" overflow="visible" role="img" aria-label="블록 영작"></svg>
   </section>
 
   <main class="board" id="board"></main>
@@ -118,14 +148,14 @@ h1 em{font-style:normal;color:var(--orange)}
            ['영','#D1372B','#E2685F','#8E241C','#FFFFFF'],['작','#FCA311','#FFC35E','#B07209','#14213D']];
   const s=140,d=24,gap=6,y0=46;let g='';
   B.forEach(([ch,f,t,sd,tx],i)=>{
-    const x=i*(s+gap+4)+4;
+    const x=i*(s+gap+4)+4;g+='<g class="lb">';
     g+=`<polygon points="${x},${y0} ${x+d},${y0-d} ${x+s+d},${y0-d} ${x+s},${y0}" fill="${t}"/>`;
     g+=`<polygon points="${x+s},${y0} ${x+s+d},${y0-d} ${x+s+d},${y0+s-d} ${x+s},${y0+s}" fill="${sd}"/>`;
     [0.3,0.72].forEach(p=>{const cx=x+s*p+d/2,cy=y0-d/2;
       g+=`<path d="M${cx-24},${cy} v-9 a24,8 0 0 1 48,0 v9 a24,8 0 0 1 -48,0z" fill="${sd}" opacity=".75"/>`;
       g+=`<ellipse cx="${cx}" cy="${cy-9}" rx="24" ry="8" fill="${t}"/>`;});
     g+=`<rect x="${x}" y="${y0}" width="${s}" height="${s}" fill="${f}"/>`;
-    g+=`<text x="${x+s/2}" y="${y0+s/2+38}" text-anchor="middle" font-family="Pretendard" font-weight="900" font-size="112" fill="${tx}">${ch}</text>`;
+    g+=`<text x="${x+s/2}" y="${y0+s/2+38}" text-anchor="middle" font-family="Pretendard" font-weight="900" font-size="112" fill="${tx}">${ch}</text></g>`;
   });
   document.getElementById('logo').innerHTML=g;
 })();
