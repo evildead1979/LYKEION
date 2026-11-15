@@ -50,9 +50,9 @@ h1 em{font-style:normal;color:var(--orange)}
 .s1 .rounds{grid-template-columns:repeat(4,minmax(0,1fr))}
 .s2 .rounds{grid-template-columns:repeat(3,minmax(0,1fr))}
 .round{display:flex;flex-direction:column;gap:clamp(6px,.9vh,10px);min-width:0}
-.rno{display:flex;align-items:baseline;gap:10px;padding-bottom:clamp(6px,.9vh,10px);border-bottom:3px solid currentColor}
+.rno{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding-bottom:clamp(6px,.9vh,10px);border-bottom:3px solid currentColor}
 .rno strong{font-weight:900;font-size:clamp(26px,2.5vw,48px);line-height:1;letter-spacing:-.03em}
-.rno strong small{font-size:.5em;font-weight:800;margin-left:2px}
+.rno strong small{font-size:.36em;font-weight:800;letter-spacing:.14em;margin-right:4px;vertical-align:.12em}
 .rno span{font-weight:800;font-size:clamp(14px,1.2vw,22px)}
 
 /* 어법 블록: 윗면 스터드 2개가 있는 블록 */
@@ -74,7 +74,7 @@ h1 em{font-style:normal;color:var(--orange)}
 .mix{display:flex;flex-direction:column;gap:clamp(8px,1.2vh,14px);flex:1;border-radius:14px;background:var(--navy-3);padding:clamp(12px,1vw,18px)}
 .mix .lab{color:var(--orange);font-weight:800;letter-spacing:.2em;font-size:clamp(11px,.8vw,15px)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{background:var(--paper);color:var(--ink);font-weight:800;border-radius:8px;padding:.35em .7em;font-size:clamp(13px,1vw,19px)}
+.chip{background:var(--paper);color:var(--ink);font-weight:800;border-radius:8px;padding:.35em .6em;font-size:clamp(11px,.85vw,17px);letter-spacing:.02em}
 .chip.all{background:var(--orange)}
 .mix p{font-weight:700;font-size:clamp(14px,1.1vw,21px);line-height:1.4}
 .mix .wait{margin-top:auto;color:var(--fg-2);font-weight:600;font-size:clamp(12px,.85vw,16px)}
@@ -139,7 +139,7 @@ h1 em{font-style:normal;color:var(--orange)}
   </section>
 
   <main class="board" id="board"></main>
-  <p class="note">각 회차의 어법 포인트는 확정 전 구성안입니다. 주황 블록을 누르면 수업 화면이 열리고, 흰 블록은 수업 화면 준비 중입니다.</p>
+  <p class="note">각 WEEK의 어법 포인트는 확정 전 구성안입니다. 주황 블록을 누르면 수업 화면이 열리고, 흰 블록은 수업 화면 준비 중입니다.</p>
 </div>
 
 <script>
@@ -169,17 +169,18 @@ const S1=[
   {no:4,theme:'절 넣기',pts:[['명사절 that'],['관계대명사 what'],['간접의문문']]},
 ];
 const S2=[
-  {no:5,theme:'뼈대 + 꾸밈',from:['1회','3회'],what:'꾸밈이 붙은 긴 주어로 문장 쌓기'},
-  {no:6,theme:'뼈대 + 절',from:['2회','4회'],what:'동사 뒤에 절을 넣어 문장 쌓기'},
+  {no:5,theme:'뼈대 + 꾸밈',from:['WEEK01','WEEK03'],what:'꾸밈이 붙은 긴 주어로 문장 쌓기'},
+  {no:6,theme:'뼈대 + 절',from:['WEEK02','WEEK04'],what:'동사 뒤에 절을 넣어 문장 쌓기'},
   {no:7,theme:'실전 조건영작',from:['전체 블록'],what:'학교식 〈보기〉 조건영작과 재진단'},
 ];
-const head=(r)=>`<div class="rno"><strong>${r.no}<small>회</small></strong><span>${r.theme}</span></div>`;
+const wk=(n)=>String(n).padStart(2,"0");
+const head=(r)=>`<div class="rno"><strong><small>WEEK</small>${wk(r.no)}</strong><span>${r.theme}</span></div>`;
 document.getElementById('board').innerHTML=
- `<section class="season s1"><div class="shead"><b>SEASON 1</b><i>1월 · 4회</i><span>어법 한 포인트씩 정복</span></div><div class="rounds">`+
+ `<section class="season s1"><div class="shead"><b>SEASON 1</b><i>1월 · 4주</i><span>어법 한 포인트씩 정복</span></div><div class="rounds">`+
  S1.map(r=>`<div class="round">${head(r)}${r.pts.map(([n,h])=>h
    ?`<a class="pt ready" href="${h}"><span>${n}</span><span class="go">수업 ▶</span></a>`
    :`<div class="pt"><span>${n}</span></div>`).join('')}</div>`).join('')+`</div></section>`+
- `<section class="season s2"><div class="shead"><b>SEASON 2</b><i>2월 · 3회</i><span>여러 어법이 섞인 문장 정복</span></div><div class="rounds">`+
+ `<section class="season s2"><div class="shead"><b>SEASON 2</b><i>2월 · 3주</i><span>여러 어법이 섞인 문장 정복</span></div><div class="rounds">`+
  S2.map(r=>`<div class="round">${head(r)}<div class="mix"><span class="lab">섞는 블록</span><div class="chips">${r.from.map(f=>`<span class="chip${f==='전체 블록'?' all':''}">${f}</span>`).join('')}</div><p>${r.what}</p><span class="wait">준비 중</span></div></div>`).join('')+`</div></section>`;
 </script>
 </body>
