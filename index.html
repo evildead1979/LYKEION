@@ -79,7 +79,8 @@ h1 em{font-style:normal;color:var(--orange)}
 
 .s2 .rno{color:var(--fg)}
 .mix{display:flex;flex-direction:column;gap:clamp(8px,1.2vh,14px);flex:1;padding:clamp(8px,1.1vh,14px) 0}
-.mix .lab{color:var(--orange);font-weight:800;letter-spacing:.2em;font-size:clamp(11px,.8vw,15px)}
+.mix .lab{white-space:nowrap;color:var(--orange);font-weight:800;letter-spacing:.12em;font-size:clamp(11px,.8vw,15px)}
+.mix .lab em{font-style:normal;letter-spacing:0;color:var(--fg);margin-left:.35em;font-weight:700}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{background:var(--paper);color:var(--ink);font-weight:800;border-radius:8px;padding:.35em .6em;font-size:clamp(11px,.85vw,17px);letter-spacing:.02em}
 .chip.all{background:var(--orange)}
@@ -108,7 +109,7 @@ h1 em{font-style:normal;color:var(--orange)}
 .round:hover .rno{border-color:var(--orange)}
 .s1 .round:hover .rno strong{color:var(--red)}
 .s2 .round:hover .rno strong{color:var(--orange)}
-/* 시즌 2: 마우스를 올리면 섞는 블록 칩이 차례로 튄다 */
+/* 시즌 2: 마우스를 올리면 조합 블록 칩이 차례로 튄다 */
 .mix p{transition:color .2s}
 .round:hover .mix p{color:#fff}
 .round:hover .chip{animation:pop .45s cubic-bezier(.3,1.8,.5,1) both}
@@ -188,7 +189,7 @@ document.getElementById('board').innerHTML=
    ?`<a class="pt ready" href="${h}"><span class="ix">${r.no}-${j+1}</span><span class="nm">${ch(n)}</span><span class="go">▶</span></a>`
    :`<div class="pt"><span class="ix">${r.no}-${j+1}</span><span class="nm">${ch(n)}</span></div>`).join('')}</div>`).join('')+`</div></section>`+
  `<section class="season s2"><div class="shead"><b>SEASON 2</b><i>2월 · 3주</i><span>여러 어법이 섞인 문장 정복</span></div><div class="rounds">`+
- S2.map(r=>`<div class="round">${head(r)}<div class="mix"><span class="lab">섞는 블록</span><div class="chips">${r.from.map(f=>`<span class="chip${f==='전체 블록'?' all':''}">${f}</span>`).join('')}</div><p>${ch(r.what)}</p><span class="wait">준비 중</span></div></div>`).join('')+`</div></section>`;
+ S2.map(r=>`<div class="round">${head(r)}<div class="mix"><span class="lab">COMBO BLOCK<em>· 조합 블록</em></span><div class="chips">${r.from.map(f=>`<span class="chip${f==='전체 블록'?' all':''}">${f}</span>`).join('')}</div><p>${ch(r.what)}</p><span class="wait">준비 중</span></div></div>`).join('')+`</div></section>`;
 </script>
 </body>
 </html>
