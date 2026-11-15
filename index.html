@@ -79,8 +79,10 @@ h1 em{font-style:normal;color:var(--orange)}
 
 .s2 .rno{color:var(--fg)}
 .mix{display:flex;flex-direction:column;gap:clamp(8px,1.2vh,14px);flex:1;padding:clamp(8px,1.1vh,14px) 0}
-.mix .lab{white-space:nowrap;color:var(--orange);font-weight:800;letter-spacing:.12em;font-size:clamp(11px,.8vw,15px)}
-.mix .lab em{font-style:normal;letter-spacing:0;color:var(--fg);margin-left:.35em;font-weight:700}
+.lab{white-space:nowrap;color:var(--orange);font-weight:800;letter-spacing:.12em;font-size:clamp(11px,.8vw,15px)}
+.s1lab{color:var(--red);margin-top:clamp(4px,.8vh,10px)}
+.s1 .lab em{color:var(--ink)}
+.lab em{font-style:normal;letter-spacing:0;color:var(--fg);margin-left:.35em;font-weight:700}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{background:var(--paper);color:var(--ink);font-weight:800;border-radius:8px;padding:.35em .6em;font-size:clamp(11px,.85vw,17px);letter-spacing:.02em}
 .chip.all{background:var(--orange)}
@@ -185,7 +187,7 @@ const wk=(n)=>String(n).padStart(2,"0");
 const head=(r)=>`<div class="rno"><strong><small>WEEK</small>${wk(r.no)}</strong><span>${r.theme}</span></div>`;
 document.getElementById('board').innerHTML=
  `<section class="season s1"><div class="shead"><b>SEASON 1</b><i>1월 · 4주</i><span>어법 한 포인트씩 정복</span></div><div class="rounds">`+
- S1.map(r=>`<div class="round">${head(r)}${r.pts.map(([n,h],j)=>h
+ S1.map(r=>`<div class="round">${head(r)}<span class="lab s1lab">SINGLE BLOCK<em>· 단일 블록</em></span>${r.pts.map(([n,h],j)=>h
    ?`<a class="pt ready" href="${h}"><span class="ix">${r.no}-${j+1}</span><span class="nm">${ch(n)}</span><span class="go">▶</span></a>`
    :`<div class="pt"><span class="ix">${r.no}-${j+1}</span><span class="nm">${ch(n)}</span></div>`).join('')}</div>`).join('')+`</div></section>`+
  `<section class="season s2"><div class="shead"><b>SEASON 2</b><i>2월 · 3주</i><span>여러 어법이 섞인 문장 정복</span></div><div class="rounds">`+
