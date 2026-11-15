@@ -83,11 +83,12 @@ h1 em{font-style:normal;color:var(--orange)}
 
 /* ── 동적 효과 ── */
 /* 로고: 처음 열 때 블록이 하나씩 떨어져 끼워지고, 마우스를 올리면 그 블록만 들렸다 내려앉는다 */
-.lb{transform-box:fill-box;transform-origin:50% 100%;animation:drop .7s cubic-bezier(.3,1.5,.5,1) both;cursor:pointer}
+.lb{transform-box:fill-box;transform-origin:50% 55%;animation:drop .7s cubic-bezier(.3,1.5,.5,1) both;cursor:pointer}
 .lb:nth-child(2){animation-delay:.12s}.lb:nth-child(3){animation-delay:.24s}.lb:nth-child(4){animation-delay:.36s}
 @keyframes drop{0%{transform:translateY(-120%);opacity:0}60%{opacity:1}100%{transform:none}}
-.lb:hover{animation:hop .55s cubic-bezier(.3,1.6,.5,1) both}
-@keyframes hop{0%{transform:none}40%{transform:translateY(-16%) rotate(-3deg)}70%{transform:translateY(2%) scaleY(.96)}100%{transform:none}}
+.logo.ready .lb:not(:hover){animation:none}
+.lb:hover{animation:spin .9s cubic-bezier(.45,0,.2,1) both}
+@keyframes spin{0%{transform:none}25%{transform:translateY(-22%) rotate(0)}75%{transform:translateY(-22%) rotate(360deg)}90%{transform:translateY(3%) scaleY(.95) rotate(360deg)}100%{transform:rotate(360deg)}}
 /* 어법 블록: 들어 올리면 스터드가 솟고 그림자가 생긴다 */
 .pt{transition:transform .22s cubic-bezier(.3,1.6,.5,1),box-shadow .22s}
 .pt::before,.pt::after{transition:transform .22s cubic-bezier(.3,1.6,.5,1)}
@@ -157,7 +158,7 @@ h1 em{font-style:normal;color:var(--orange)}
     g+=`<rect x="${x}" y="${y0}" width="${s}" height="${s}" fill="${f}"/>`;
     g+=`<text x="${x+s/2}" y="${y0+s/2+38}" text-anchor="middle" font-family="Pretendard" font-weight="900" font-size="112" fill="${tx}">${ch}</text></g>`;
   });
-  document.getElementById('logo').innerHTML=g;
+  const L=document.getElementById('logo');L.innerHTML=g;setTimeout(()=>L.classList.add('ready'),1200);
 })();
 
 /* 7주 구성 (주소가 있는 포인트만 수업 화면이 있음) */
