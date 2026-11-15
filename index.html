@@ -65,13 +65,14 @@ h1 em{font-style:normal;color:var(--orange)}
 /* 어법 포인트: 박스 없이 가는 선으로 나눈 목록 */
 .pt{position:relative;display:flex;align-items:center;gap:8px;min-height:clamp(48px,7.6vh,82px);
   padding:clamp(8px,1.1vh,14px) 0;border-bottom:1px solid rgba(20,33,61,.14);
-  font-weight:700;font-size:clamp(13px,1.05vw,20px);line-height:1.3}
+  font-weight:700;font-size:clamp(13px,.95vw,18px);line-height:1.3}
 .pt:last-child{border-bottom:0}
-.pt .ix{flex:none;white-space:nowrap;font-weight:800;font-size:.7em;letter-spacing:.04em;color:#9AA1B2;width:2.3em;transition:color .2s}
+.pt .ix{flex:none;white-space:nowrap;font-weight:800;font-size:.68em;letter-spacing:0;color:#9AA1B2;width:2.1em;transition:color .2s}
 .pt .nm{flex:1;min-width:0;transition:transform .25s cubic-bezier(.3,1.4,.5,1)}
 .pt::before{content:"";position:absolute;left:-14px;top:22%;bottom:22%;width:4px;border-radius:2px;background:var(--ink);
   transform:scaleY(0);transition:transform .25s cubic-bezier(.3,1.4,.5,1)}
-.pt .go{flex:none;white-space:nowrap;font-weight:800;font-size:.7em;border-radius:999px;padding:.35em .7em;background:var(--orange);color:var(--ink);transition:transform .2s}
+.u{white-space:nowrap}
+.pt .go{flex:none;white-space:nowrap;font-weight:800;font-size:.7em;border-radius:999px;padding:.4em .6em;background:var(--orange);color:var(--ink);transition:transform .2s}
 .pt.ready{cursor:pointer}
 .pt.ready::before{background:var(--orange);transform:scaleY(1)}
 .pt.ready .ix{color:var(--orange)}
@@ -168,25 +169,26 @@ h1 em{font-style:normal;color:var(--orange)}
 
 /* 7주 구성 (주소가 있는 포인트만 수업 화면이 있음) */
 const S1=[
-  {no:1,theme:'주어와 동사',pts:[['긴 주어 + 동사 수일치'],['동명사·to부정사 주어'],['수동태']]},
-  {no:2,theme:'동사 뒤 자리',pts:[['5형식 O + to V'],['사역·지각동사 + O + 원형'],['가주어 it']]},
-  {no:3,theme:'명사 꾸미기',pts:[['분사 후치수식','block-writing/participle.html'],['주격 관계대명사'],['목적격 관계대명사']]},
-  {no:4,theme:'절 넣기',pts:[['명사절 that'],['관계대명사 what'],['간접의문문']]},
+  {no:1,theme:'주어와 동사',pts:[['긴 주어 +|동사 수일치'],['동명사·to부정사|주어'],['수동태']]},
+  {no:2,theme:'동사 뒤 자리',pts:[['5형식 O + to V'],['사역·지각동사|+ O + 원형'],['가주어 it']]},
+  {no:3,theme:'명사 꾸미기',pts:[['분사 후치수식','block-writing/participle.html'],['주격|관계대명사'],['목적격|관계대명사']]},
+  {no:4,theme:'절 넣기',pts:[['명사절 that'],['관계대명사|what'],['간접의문문']]},
 ];
 const S2=[
-  {no:5,theme:'뼈대 + 꾸밈',from:['WEEK01','WEEK03'],what:'꾸밈이 붙은 긴 주어로 문장 쌓기'},
-  {no:6,theme:'뼈대 + 절',from:['WEEK02','WEEK04'],what:'동사 뒤에 절을 넣어 문장 쌓기'},
-  {no:7,theme:'실전 조건영작',from:['전체 블록'],what:'학교식 〈보기〉 조건영작과 재진단'},
+  {no:5,theme:'뼈대 + 꾸밈',from:['WEEK01','WEEK03'],what:'꾸밈이 붙은 긴 주어로|문장 쌓기'},
+  {no:6,theme:'뼈대 + 절',from:['WEEK02','WEEK04'],what:'동사 뒤에 절을 넣어|문장 쌓기'},
+  {no:7,theme:'실전 조건영작',from:['전체 블록'],what:'학교식 〈보기〉|조건영작과 재진단'},
 ];
+const ch=(t)=>t.split("|").map(x=>`<span class="u">${x}</span>`).join(" ");
 const wk=(n)=>String(n).padStart(2,"0");
 const head=(r)=>`<div class="rno"><strong><small>WEEK</small>${wk(r.no)}</strong><span>${r.theme}</span></div>`;
 document.getElementById('board').innerHTML=
  `<section class="season s1"><div class="shead"><b>SEASON 1</b><i>1월 · 4주</i><span>어법 한 포인트씩 정복</span></div><div class="rounds">`+
  S1.map(r=>`<div class="round">${head(r)}${r.pts.map(([n,h],j)=>h
-   ?`<a class="pt ready" href="${h}"><span class="ix">${r.no}-${j+1}</span><span class="nm">${n}</span><span class="go">수업 ▶</span></a>`
-   :`<div class="pt"><span class="ix">${r.no}-${j+1}</span><span class="nm">${n}</span></div>`).join('')}</div>`).join('')+`</div></section>`+
+   ?`<a class="pt ready" href="${h}"><span class="ix">${r.no}-${j+1}</span><span class="nm">${ch(n)}</span><span class="go">▶</span></a>`
+   :`<div class="pt"><span class="ix">${r.no}-${j+1}</span><span class="nm">${ch(n)}</span></div>`).join('')}</div>`).join('')+`</div></section>`+
  `<section class="season s2"><div class="shead"><b>SEASON 2</b><i>2월 · 3주</i><span>여러 어법이 섞인 문장 정복</span></div><div class="rounds">`+
- S2.map(r=>`<div class="round">${head(r)}<div class="mix"><span class="lab">섞는 블록</span><div class="chips">${r.from.map(f=>`<span class="chip${f==='전체 블록'?' all':''}">${f}</span>`).join('')}</div><p>${r.what}</p><span class="wait">준비 중</span></div></div>`).join('')+`</div></section>`;
+ S2.map(r=>`<div class="round">${head(r)}<div class="mix"><span class="lab">섞는 블록</span><div class="chips">${r.from.map(f=>`<span class="chip${f==='전체 블록'?' all':''}">${f}</span>`).join('')}</div><p>${ch(r.what)}</p><span class="wait">준비 중</span></div></div>`).join('')+`</div></section>`;
 </script>
 </body>
 </html>
