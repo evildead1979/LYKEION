@@ -55,23 +55,22 @@ h1 em{font-style:normal;color:var(--orange)}
 .rno strong small{font-size:.36em;font-weight:800;letter-spacing:.14em;margin-right:4px;vertical-align:.12em}
 .rno span{font-weight:800;font-size:clamp(14px,1.2vw,22px)}
 
-/* 어법 블록: 윗면 스터드 2개가 있는 블록 */
-.pt{position:relative;display:flex;align-items:center;justify-content:space-between;gap:8px;
-  border-radius:10px;padding:clamp(10px,1.3vh,16px) clamp(10px,.9vw,16px);margin-top:9px;
-  font-weight:700;font-size:clamp(13px,1.05vw,20px);line-height:1.3;min-height:clamp(46px,6.4vh,74px)}
-.pt::before,.pt::after{content:"";position:absolute;top:-8px;width:26px;height:9px;border-radius:5px 5px 0 0}
-.pt::before{left:14px} .pt::after{left:48px}
-.s1 .pt{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1.5px #D6D9E0}
-.s1 .pt::before,.s1 .pt::after{background:#D6D9E0}
-.pt .go{flex:none;font-weight:800;font-size:.82em;border-radius:999px;padding:.3em .75em}
-.s1 .pt.ready{background:var(--orange);color:var(--ink);box-shadow:none;cursor:pointer;transition:transform .15s}
-.s1 .pt.ready::before,.s1 .pt.ready::after{background:#D98A06}
-.pt.ready .go{background:var(--ink);color:var(--orange)}
-.pt.ready:hover{transform:translateY(-2px)}
-.round .pt{flex:1;max-height:118px}
+/* 어법 포인트: 박스 없이 가는 선으로 나눈 목록 */
+.pt{position:relative;display:flex;align-items:center;gap:8px;flex:1;min-height:clamp(44px,6vh,72px);
+  padding:clamp(8px,1.1vh,14px) 0;border-bottom:1px solid rgba(20,33,61,.14);
+  font-weight:700;font-size:clamp(13px,1.05vw,20px);line-height:1.3}
+.pt:last-child{border-bottom:0}
+.pt .ix{flex:none;white-space:nowrap;font-weight:800;font-size:.7em;letter-spacing:.04em;color:#9AA1B2;width:2.3em;transition:color .2s}
+.pt .nm{flex:1;min-width:0;transition:transform .25s cubic-bezier(.3,1.4,.5,1)}
+.pt::before{content:"";position:absolute;left:-14px;top:22%;bottom:22%;width:4px;border-radius:2px;background:var(--ink);
+  transform:scaleY(0);transition:transform .25s cubic-bezier(.3,1.4,.5,1)}
+.pt .go{flex:none;white-space:nowrap;font-weight:800;font-size:.7em;border-radius:999px;padding:.35em .7em;background:var(--orange);color:var(--ink);transition:transform .2s}
+.pt.ready{cursor:pointer}
+.pt.ready::before{background:var(--orange);transform:scaleY(1)}
+.pt.ready .ix{color:var(--orange)}
 
 .s2 .rno{color:var(--fg)}
-.mix{display:flex;flex-direction:column;gap:clamp(8px,1.2vh,14px);flex:1;border-radius:14px;background:var(--navy-3);padding:clamp(12px,1vw,18px)}
+.mix{display:flex;flex-direction:column;gap:clamp(8px,1.2vh,14px);flex:1;padding:clamp(8px,1.1vh,14px) 0}
 .mix .lab{color:var(--orange);font-weight:800;letter-spacing:.2em;font-size:clamp(11px,.8vw,15px)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{background:var(--paper);color:var(--ink);font-weight:800;border-radius:8px;padding:.35em .6em;font-size:clamp(11px,.85vw,17px);letter-spacing:.02em}
@@ -89,26 +88,23 @@ h1 em{font-style:normal;color:var(--orange)}
 .logo.ready .lb:not(:hover){animation:none}
 .lb:hover{animation:spin .9s cubic-bezier(.45,0,.2,1) both}
 @keyframes spin{0%{transform:none}25%{transform:translateY(-22%) rotate(0)}75%{transform:translateY(-22%) rotate(360deg)}90%{transform:translateY(3%) scaleY(.95) rotate(360deg)}100%{transform:rotate(360deg)}}
-/* 어법 블록: 들어 올리면 스터드가 솟고 그림자가 생긴다 */
-.pt{transition:transform .22s cubic-bezier(.3,1.6,.5,1),box-shadow .22s}
-.pt::before,.pt::after{transition:transform .22s cubic-bezier(.3,1.6,.5,1)}
-.s1 .pt:hover{transform:translateY(-6px) rotate(-.6deg);box-shadow:inset 0 0 0 2px var(--ink),0 10px 0 -2px #C9CDD6,0 18px 24px -10px rgba(20,33,61,.45)}
-.s1 .pt:hover::before{transform:translateY(-4px)}.s1 .pt:hover::after{transform:translateY(-4px);transition-delay:.05s}
-.s1 .pt.ready:hover{transform:translateY(-8px) rotate(-.8deg);box-shadow:0 10px 0 -2px #C27C05,0 20px 28px -10px rgba(20,33,61,.5)}
-.pt.ready .go{transition:transform .2s}
-.pt.ready:hover .go{transform:translateX(4px)}
-.pt.ready{animation:glow 2.4s ease-in-out infinite}
-@keyframes glow{0%,100%{filter:none}50%{filter:brightness(1.08) drop-shadow(0 0 10px rgba(252,163,17,.55))}}
+/* 마우스를 올리면 왼쪽 막대가 서고 글자가 밀려 들어온다 */
+.pt:hover::before{transform:scaleY(1)}
+.pt:hover .nm{transform:translateX(8px)}
+.pt:hover .ix{color:var(--ink)}
+.pt.ready:hover .go{transform:translateX(4px) scale(1.06)}
+.pt.ready .go{animation:glow 2.4s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(252,163,17,0)}50%{box-shadow:0 0 0 6px rgba(252,163,17,.25)}}
 /* 회차 머리: 그 회차 블록에 마우스가 있으면 밑줄이 주황으로 */
 .rno{transition:border-color .2s,color .2s}
 .round:hover .rno{border-color:var(--orange)}
 .s1 .round:hover .rno strong{color:var(--red)}
 .s2 .round:hover .rno strong{color:var(--orange)}
-/* 시즌 2 섞기 카드: 떠오르며 섞는 블록 칩이 차례로 튄다 */
-.mix{transition:transform .25s cubic-bezier(.3,1.6,.5,1),box-shadow .25s,background .25s}
-.mix:hover{transform:translateY(-6px);background:#2B3F6B;box-shadow:inset 0 0 0 2px var(--orange),0 18px 28px -12px rgba(0,0,0,.6)}
-.mix:hover .chip{animation:pop .45s cubic-bezier(.3,1.8,.5,1) both}
-.mix:hover .chip:nth-child(2){animation-delay:.08s}
+/* 시즌 2: 마우스를 올리면 섞는 블록 칩이 차례로 튄다 */
+.mix p{transition:color .2s}
+.round:hover .mix p{color:#fff}
+.round:hover .chip{animation:pop .45s cubic-bezier(.3,1.8,.5,1) both}
+.round:hover .chip:nth-child(2){animation-delay:.08s}
 @keyframes pop{0%{transform:none}45%{transform:translateY(-7px) scale(1.08)}100%{transform:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
@@ -139,7 +135,7 @@ h1 em{font-style:normal;color:var(--orange)}
   </section>
 
   <main class="board" id="board"></main>
-  <p class="note">각 WEEK의 어법 포인트는 확정 전 구성안입니다. 주황 블록을 누르면 수업 화면이 열리고, 흰 블록은 수업 화면 준비 중입니다.</p>
+  <p class="note">각 WEEK의 어법 포인트는 확정 전 구성안입니다. 주황 표시가 있는 포인트를 누르면 수업 화면이 열립니다.</p>
 </div>
 
 <script>
@@ -177,9 +173,9 @@ const wk=(n)=>String(n).padStart(2,"0");
 const head=(r)=>`<div class="rno"><strong><small>WEEK</small>${wk(r.no)}</strong><span>${r.theme}</span></div>`;
 document.getElementById('board').innerHTML=
  `<section class="season s1"><div class="shead"><b>SEASON 1</b><i>1월 · 4주</i><span>어법 한 포인트씩 정복</span></div><div class="rounds">`+
- S1.map(r=>`<div class="round">${head(r)}${r.pts.map(([n,h])=>h
-   ?`<a class="pt ready" href="${h}"><span>${n}</span><span class="go">수업 ▶</span></a>`
-   :`<div class="pt"><span>${n}</span></div>`).join('')}</div>`).join('')+`</div></section>`+
+ S1.map(r=>`<div class="round">${head(r)}${r.pts.map(([n,h],j)=>h
+   ?`<a class="pt ready" href="${h}"><span class="ix">${r.no}-${j+1}</span><span class="nm">${n}</span><span class="go">수업 ▶</span></a>`
+   :`<div class="pt"><span class="ix">${r.no}-${j+1}</span><span class="nm">${n}</span></div>`).join('')}</div>`).join('')+`</div></section>`+
  `<section class="season s2"><div class="shead"><b>SEASON 2</b><i>2월 · 3주</i><span>여러 어법이 섞인 문장 정복</span></div><div class="rounds">`+
  S2.map(r=>`<div class="round">${head(r)}<div class="mix"><span class="lab">섞는 블록</span><div class="chips">${r.from.map(f=>`<span class="chip${f==='전체 블록'?' all':''}">${f}</span>`).join('')}</div><p>${r.what}</p><span class="wait">준비 중</span></div></div>`).join('')+`</div></section>`;
 </script>
