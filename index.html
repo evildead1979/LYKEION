@@ -29,7 +29,7 @@ a{color:inherit;text-decoration:none}
 .eng span{display:block;color:var(--fg-2);font-weight:600}
 
 /* 표지 */
-.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:center;gap:clamp(20px,4vw,72px)}
+.hero{flex:1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:center;gap:clamp(20px,4vw,72px)}
 .kicker{color:var(--orange);font-weight:800;font-size:clamp(16px,1.5vw,28px);letter-spacing:-.01em}
 h1{font-weight:900;font-size:clamp(34px,4.3vw,82px);line-height:1.12;letter-spacing:-.035em;margin-top:.25em}
 h1 em{font-style:normal;color:var(--orange)}
@@ -43,7 +43,7 @@ h1 em{font-style:normal;color:var(--orange)}
 .logo svg+svg{margin-left:-3.6%}
 
 /* 7주 보드 */
-.board{display:grid;grid-template-columns:4fr 3fr;gap:clamp(12px,1.2vw,22px);flex:1;min-height:0}
+.board{display:grid;grid-template-columns:4fr 3fr;gap:clamp(12px,1.2vw,22px)}
 .season{border-radius:22px;padding:clamp(16px,1.6vw,28px);display:flex;flex-direction:column;gap:clamp(12px,1.6vh,20px)}
 .s1{background:var(--paper);color:var(--ink)}
 .s2{background:var(--navy-2);border:2px solid var(--orange)}
@@ -52,17 +52,17 @@ h1 em{font-style:normal;color:var(--orange)}
 .shead i{font-style:normal;font-weight:800;font-size:clamp(16px,1.4vw,26px)}
 .s1 .shead i{color:var(--red)} .s2 .shead i,.s2 .shead b{color:var(--orange)}
 .shead span{font-weight:700;font-size:clamp(15px,1.3vw,24px)}
-.rounds{display:grid;gap:clamp(8px,.8vw,14px);flex:1}
+.rounds{display:grid;gap:clamp(8px,.8vw,14px)}
 .s1 .rounds{grid-template-columns:repeat(4,minmax(0,1fr))}
 .s2 .rounds{grid-template-columns:repeat(3,minmax(0,1fr))}
 .round{display:flex;flex-direction:column;gap:clamp(6px,.9vh,10px);min-width:0}
 .rno{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding-bottom:clamp(6px,.9vh,10px);border-bottom:3px solid currentColor}
-.rno strong{font-weight:900;font-size:clamp(26px,2.5vw,48px);line-height:1;letter-spacing:-.03em}
-.rno strong small{font-size:.36em;font-weight:800;letter-spacing:.14em;margin-right:4px;vertical-align:.12em}
+.rno strong{white-space:nowrap;font-weight:900;font-size:clamp(24px,2.2vw,42px);line-height:1;letter-spacing:-.03em}
+.rno strong small{font-size:1em;font-weight:900;margin-right:.22em}
 .rno span{font-weight:800;font-size:clamp(14px,1.2vw,22px)}
 
 /* 어법 포인트: 박스 없이 가는 선으로 나눈 목록 */
-.pt{position:relative;display:flex;align-items:center;gap:8px;flex:1;min-height:clamp(44px,6vh,72px);
+.pt{position:relative;display:flex;align-items:center;gap:8px;min-height:clamp(48px,7.6vh,82px);
   padding:clamp(8px,1.1vh,14px) 0;border-bottom:1px solid rgba(20,33,61,.14);
   font-weight:700;font-size:clamp(13px,1.05vw,20px);line-height:1.3}
 .pt:last-child{border-bottom:0}
@@ -82,7 +82,7 @@ h1 em{font-style:normal;color:var(--orange)}
 .chip{background:var(--paper);color:var(--ink);font-weight:800;border-radius:8px;padding:.35em .6em;font-size:clamp(11px,.85vw,17px);letter-spacing:.02em}
 .chip.all{background:var(--orange)}
 .mix p{font-weight:700;font-size:clamp(14px,1.1vw,21px);line-height:1.4}
-.mix .wait{margin-top:auto;color:var(--fg-2);font-weight:600;font-size:clamp(12px,.85vw,16px)}
+.mix .wait{margin-top:4px;color:var(--fg-2);font-weight:600;font-size:clamp(12px,.85vw,16px)}
 
 .note{color:var(--fg-2);font-size:clamp(12px,.8vw,15px);font-weight:500}
 
