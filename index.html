@@ -1,16 +1,155 @@
 <!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>리케이온 블록 영작</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@600;700;800&display=swap">
-    <script type="module" crossorigin src="./assets/index-C8HLfzQ6.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-nQaPsjN0.css">
-  </head>
-  <body style="background:#14213D;margin:0">
-    <div id="root"></div>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>리케이온 블록 영작</title>
+<link rel="icon" href="favicon.svg">
+<style>
+@font-face{font-family:'Pretendard';font-weight:45 920;font-style:normal;font-display:block;src:local('Pretendard Variable'),url(fonts/Pretendard.woff2) format('woff2')}
+/* 칠판용 선생님 첫 화면: 16:9 한 화면. 블록 영작 카드뉴스와 같은 디자인 언어 */
+:root{
+  --navy:#14213D; --navy-2:#1B2B4E; --navy-3:#24365E;
+  --gray:#E5E5E5; --paper:#F2F3F6; --red:#D1372B; --orange:#FCA311;
+  --ink:#14213D; --fg:#EDEDED; --fg-2:#A3ABBD;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:var(--navy);color:var(--fg);font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
+  font-size:clamp(14px,1.1vw,20px);-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{color:inherit;text-decoration:none}
+.page{min-height:100%;max-width:1760px;margin:0 auto;padding:clamp(16px,2.2vh,32px) clamp(16px,3vw,64px);display:flex;flex-direction:column;gap:clamp(14px,2.6vh,34px)}
+
+/* 머리 줄 */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:clamp(10px,1.6vh,18px);border-bottom:4px solid var(--gray)}
+.bi{background:#fff;border-radius:12px;padding:6px 12px;display:flex}
+.bi img{height:clamp(36px,5vh,58px);width:auto;display:block}
+.eng{text-align:right;font-weight:800;letter-spacing:.28em;line-height:1.7;font-size:clamp(11px,.9vw,16px)}
+.eng span{display:block;color:var(--fg-2);font-weight:600}
+
+/* 표지 */
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:center;gap:clamp(20px,4vw,72px)}
+.kicker{color:var(--orange);font-weight:800;font-size:clamp(16px,1.5vw,28px);letter-spacing:-.01em}
+h1{font-weight:900;font-size:clamp(34px,4.3vw,82px);line-height:1.12;letter-spacing:-.035em;margin-top:.25em}
+h1 em{font-style:normal;color:var(--orange)}
+.sub{margin-top:.9em;color:var(--fg-2);font-weight:600;font-size:clamp(15px,1.35vw,25px)}
+.logo{width:100%;height:auto;display:block;max-height:30vh}
+
+/* 7주 보드 */
+.board{display:grid;grid-template-columns:4fr 3fr;gap:clamp(12px,1.2vw,22px);flex:1;min-height:0}
+.season{border-radius:22px;padding:clamp(16px,1.6vw,28px);display:flex;flex-direction:column;gap:clamp(12px,1.6vh,20px)}
+.s1{background:var(--paper);color:var(--ink)}
+.s2{background:var(--navy-2);border:2px solid var(--orange)}
+.shead{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 18px}
+.shead b{font-weight:800;letter-spacing:.24em;font-size:clamp(12px,.95vw,17px)}
+.shead i{font-style:normal;font-weight:800;font-size:clamp(16px,1.4vw,26px)}
+.s1 .shead i{color:var(--red)} .s2 .shead i,.s2 .shead b{color:var(--orange)}
+.shead span{font-weight:700;font-size:clamp(15px,1.3vw,24px)}
+.rounds{display:grid;gap:clamp(8px,.8vw,14px);flex:1}
+.s1 .rounds{grid-template-columns:repeat(4,minmax(0,1fr))}
+.s2 .rounds{grid-template-columns:repeat(3,minmax(0,1fr))}
+.round{display:flex;flex-direction:column;gap:clamp(6px,.9vh,10px);min-width:0}
+.rno{display:flex;align-items:baseline;gap:10px;padding-bottom:clamp(6px,.9vh,10px);border-bottom:3px solid currentColor}
+.rno strong{font-weight:900;font-size:clamp(26px,2.5vw,48px);line-height:1;letter-spacing:-.03em}
+.rno strong small{font-size:.5em;font-weight:800;margin-left:2px}
+.rno span{font-weight:800;font-size:clamp(14px,1.2vw,22px)}
+
+/* 어법 블록: 윗면 스터드 2개가 있는 블록 */
+.pt{position:relative;display:flex;align-items:center;justify-content:space-between;gap:8px;
+  border-radius:10px;padding:clamp(10px,1.3vh,16px) clamp(10px,.9vw,16px);margin-top:9px;
+  font-weight:700;font-size:clamp(13px,1.05vw,20px);line-height:1.3;min-height:clamp(46px,6.4vh,74px)}
+.pt::before,.pt::after{content:"";position:absolute;top:-8px;width:26px;height:9px;border-radius:5px 5px 0 0}
+.pt::before{left:14px} .pt::after{left:48px}
+.s1 .pt{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1.5px #D6D9E0}
+.s1 .pt::before,.s1 .pt::after{background:#D6D9E0}
+.pt .go{flex:none;font-weight:800;font-size:.82em;border-radius:999px;padding:.3em .75em}
+.s1 .pt.ready{background:var(--orange);color:var(--ink);box-shadow:none;cursor:pointer;transition:transform .15s}
+.s1 .pt.ready::before,.s1 .pt.ready::after{background:#D98A06}
+.pt.ready .go{background:var(--ink);color:var(--orange)}
+.pt.ready:hover{transform:translateY(-2px)}
+.round .pt{flex:1;max-height:118px}
+
+.s2 .rno{color:var(--fg)}
+.mix{display:flex;flex-direction:column;gap:clamp(8px,1.2vh,14px);flex:1;border-radius:14px;background:var(--navy-3);padding:clamp(12px,1vw,18px)}
+.mix .lab{color:var(--orange);font-weight:800;letter-spacing:.2em;font-size:clamp(11px,.8vw,15px)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--paper);color:var(--ink);font-weight:800;border-radius:8px;padding:.35em .7em;font-size:clamp(13px,1vw,19px)}
+.chip.all{background:var(--orange)}
+.mix p{font-weight:700;font-size:clamp(14px,1.1vw,21px);line-height:1.4}
+.mix .wait{margin-top:auto;color:var(--fg-2);font-weight:600;font-size:clamp(12px,.85vw,16px)}
+
+.note{color:var(--fg-2);font-size:clamp(12px,.8vw,15px);font-weight:500}
+
+@media (max-width:1100px){
+  .hero,.board{grid-template-columns:1fr}
+  .s1 .rounds{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  .s1 .rounds,.s2 .rounds{grid-template-columns:1fr}
+  .eng{display:none}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <div class="bi"><img src="lykeion-bi.png" alt="리케이온 고등 영어"></div>
+    <div class="eng">BLOCK WRITING<span>LYKEION HIGH SCHOOL ENGLISH</span></div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="kicker">2027 겨울학기 토요 특강</p>
+      <h1>외우던 영작에서,<br><em>조립하는</em> 영작으로.</h1>
+      <p class="sub">블록 조립으로 완성하는 내신 서술형 · 토요일 3시간 · 기초반 · 실전반</p>
+    </div>
+    <svg class="logo" id="logo" viewBox="0 0 640 210" role="img" aria-label="블록 영작"></svg>
+  </section>
+
+  <main class="board" id="board"></main>
+  <p class="note">각 회차의 어법 포인트는 확정 전 구성안입니다. 주황 블록을 누르면 수업 화면이 열리고, 흰 블록은 수업 화면 준비 중입니다.</p>
+</div>
+
+<script>
+/* 3D 블록 로고: 블=네이비 록=그레이 영=레드 작=오렌지 (확정 A안, 칠판 위라 네이비는 한 톤 밝힘) */
+(function(){
+  const B=[['블','#24365E','#56627F','#101A30','#EDEDED'],['록','#E5E5E5','#F4F4F4','#A9A9A9','#14213D'],
+           ['영','#D1372B','#E2685F','#8E241C','#FFFFFF'],['작','#FCA311','#FFC35E','#B07209','#14213D']];
+  const s=140,d=24,gap=6,y0=46;let g='';
+  B.forEach(([ch,f,t,sd,tx],i)=>{
+    const x=i*(s+gap+4)+4;
+    g+=`<polygon points="${x},${y0} ${x+d},${y0-d} ${x+s+d},${y0-d} ${x+s},${y0}" fill="${t}"/>`;
+    g+=`<polygon points="${x+s},${y0} ${x+s+d},${y0-d} ${x+s+d},${y0+s-d} ${x+s},${y0+s}" fill="${sd}"/>`;
+    [0.3,0.72].forEach(p=>{const cx=x+s*p+d/2,cy=y0-d/2;
+      g+=`<path d="M${cx-24},${cy} v-9 a24,8 0 0 1 48,0 v9 a24,8 0 0 1 -48,0z" fill="${sd}" opacity=".75"/>`;
+      g+=`<ellipse cx="${cx}" cy="${cy-9}" rx="24" ry="8" fill="${t}"/>`;});
+    g+=`<rect x="${x}" y="${y0}" width="${s}" height="${s}" fill="${f}"/>`;
+    g+=`<text x="${x+s/2}" y="${y0+s/2+38}" text-anchor="middle" font-family="Pretendard" font-weight="900" font-size="112" fill="${tx}">${ch}</text>`;
+  });
+  document.getElementById('logo').innerHTML=g;
+})();
+
+/* 7주 구성 (주소가 있는 포인트만 수업 화면이 있음) */
+const S1=[
+  {no:1,theme:'주어와 동사',pts:[['긴 주어 + 동사 수일치'],['동명사·to부정사 주어'],['수동태']]},
+  {no:2,theme:'동사 뒤 자리',pts:[['5형식 O + to V'],['사역·지각동사 + O + 원형'],['가주어 it']]},
+  {no:3,theme:'명사 꾸미기',pts:[['분사 후치수식','block-writing/participle.html'],['주격 관계대명사'],['목적격 관계대명사']]},
+  {no:4,theme:'절 넣기',pts:[['명사절 that'],['관계대명사 what'],['간접의문문']]},
+];
+const S2=[
+  {no:5,theme:'뼈대 + 꾸밈',from:['1회','3회'],what:'꾸밈이 붙은 긴 주어로 문장 쌓기'},
+  {no:6,theme:'뼈대 + 절',from:['2회','4회'],what:'동사 뒤에 절을 넣어 문장 쌓기'},
+  {no:7,theme:'실전 조건영작',from:['전체 블록'],what:'학교식 〈보기〉 조건영작과 재진단'},
+];
+const head=(r)=>`<div class="rno"><strong>${r.no}<small>회</small></strong><span>${r.theme}</span></div>`;
+document.getElementById('board').innerHTML=
+ `<section class="season s1"><div class="shead"><b>SEASON 1</b><i>1월 · 4회</i><span>어법 한 포인트씩 정복</span></div><div class="rounds">`+
+ S1.map(r=>`<div class="round">${head(r)}${r.pts.map(([n,h])=>h
+   ?`<a class="pt ready" href="${h}"><span>${n}</span><span class="go">수업 ▶</span></a>`
+   :`<div class="pt"><span>${n}</span></div>`).join('')}</div>`).join('')+`</div></section>`+
+ `<section class="season s2"><div class="shead"><b>SEASON 2</b><i>2월 · 3회</i><span>여러 어법이 섞인 문장 정복</span></div><div class="rounds">`+
+ S2.map(r=>`<div class="round">${head(r)}<div class="mix"><span class="lab">섞는 블록</span><div class="chips">${r.from.map(f=>`<span class="chip${f==='전체 블록'?' all':''}">${f}</span>`).join('')}</div><p>${r.what}</p><span class="wait">준비 중</span></div></div>`).join('')+`</div></section>`;
+</script>
+</body>
 </html>
