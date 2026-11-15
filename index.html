@@ -1,3 +1,111 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>리케이온 블록 영작</title>
-<style>body{margin:0;background:#14213D;color:#fff;font-family:Pretendard,system-ui,sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center}main{padding:24px;max-width:640px;width:100%}h1{font-size:28px;margin:0 0 24px}a{display:block;background:#E5E5E5;color:#14213D;text-decoration:none;font-weight:700;font-size:20px;padding:20px;border-radius:12px;margin-bottom:12px}a span{color:#D1372B}</style></head>
-<body><main><h1>블록 영작 수업 화면</h1><a href="block-writing/participle.html"><span>시제품</span> 분사 후치수식 5단계 계단</a></main></body></html>
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>리케이온 블록 영작</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&display=swap">
+<style>
+:root{--navy:#14213D;--navy2:#1D2D52;--line:#2C3E66;--gray:#E5E5E5;--red:#D1372B;--org:#FCA311;--dim:#9AA6C2}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:#fff;font-family:Pretendard,system-ui,sans-serif;min-height:100vh}
+.wrap{max-width:1600px;margin:0 auto;padding:clamp(16px,2.5vw,40px)}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:clamp(18px,2.5vw,32px)}
+.logo{display:flex;gap:6px}
+.logo b{width:clamp(40px,4vw,60px);aspect-ratio:1;display:grid;place-items:center;background:var(--gray);color:var(--navy);font-size:clamp(22px,2.2vw,34px);font-weight:800;border-radius:6px}
+.logo b.r{background:var(--red);color:#fff}
+.sub{color:var(--dim);font-size:clamp(14px,1.2vw,18px);margin-top:8px}
+.tag{border:1px solid var(--org);color:var(--org);border-radius:999px;padding:6px 14px;font-size:14px;font-weight:600}
+.season{margin-bottom:clamp(20px,2.5vw,36px)}
+.shead{display:flex;align-items:baseline;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+.shead h2{margin:0;font-size:clamp(22px,2vw,30px)}
+.shead .badge{background:var(--org);color:var(--navy);font-weight:800;padding:4px 12px;border-radius:6px;font-size:15px}
+.shead p{margin:0;color:var(--dim);font-size:15px}
+.grid{display:grid;gap:14px}
+.s1{grid-template-columns:repeat(4,1fr)}
+.s2{grid-template-columns:repeat(3,1fr)}
+.round{background:var(--navy2);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.rh{display:flex;justify-content:space-between;align-items:center}
+.rh .no{font-family:Lexend,sans-serif;font-weight:700;font-size:22px}
+.rh .no small{font-family:Pretendard;font-size:14px;color:var(--dim);font-weight:500;margin-left:6px}
+.rh .theme{font-size:14px;color:var(--org);font-weight:700}
+a.pt,div.pt{display:flex;align-items:center;gap:10px;min-height:60px;padding:12px 14px;border-radius:10px;background:var(--gray);color:var(--navy);text-decoration:none;font-weight:700;font-size:clamp(15px,1.15vw,18px);line-height:1.3}
+.pt .n{flex:none;width:28px;height:28px;border-radius:6px;background:var(--navy);color:#fff;display:grid;place-items:center;font-family:Lexend;font-size:14px}
+div.pt{background:transparent;color:var(--dim);border:1px dashed var(--line);font-weight:600}
+div.pt .n{background:var(--line);color:var(--dim)}
+a.pt:hover,a.pt:active{background:#fff;outline:3px solid var(--org)}
+a.pt .go{margin-left:auto;font-size:13px;color:var(--red);font-weight:800;white-space:nowrap}
+.mix{display:flex;flex-wrap:wrap;gap:6px}
+.mix span{font-size:13px;padding:4px 10px;border-radius:999px;background:var(--line);color:var(--gray)}
+.mixbox{flex:1;border:1px dashed var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:10px;color:var(--dim);font-size:15px;min-height:120px}
+.mixbox strong{color:#fff;font-size:17px}
+footer{color:var(--dim);font-size:13px;margin-top:8px}
+@media (max-width:1100px){.s1{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.s1,.s2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div>
+    <div class="logo"><b>블</b><b>록</b><b class="r">영</b><b>작</b></div>
+    <div class="sub">블록 조립으로 완성하는 내신 서술형 · 2027 겨울</div>
+  </div>
+  <span class="tag">구성 시안 · 포인트 확정 전</span>
+</header>
+
+<section class="season">
+  <div class="shead"><span class="badge">시즌 1</span><h2>1월 · 어법 한 포인트씩 정복</h2><p>회당 메인 포인트 3개</p></div>
+  <div class="grid s1">
+    <div class="round">
+      <div class="rh"><span class="no">01<small>회</small></span><span class="theme">주어와 동사</span></div>
+      <div class="pt"><span class="n">1</span>긴 주어 + 동사 수일치</div>
+      <div class="pt"><span class="n">2</span>동명사·to부정사 주어</div>
+      <div class="pt"><span class="n">3</span>수동태</div>
+    </div>
+    <div class="round">
+      <div class="rh"><span class="no">02<small>회</small></span><span class="theme">동사 뒤 자리</span></div>
+      <div class="pt"><span class="n">1</span>5형식 O + to V</div>
+      <div class="pt"><span class="n">2</span>사역·지각동사 + O + 원형</div>
+      <div class="pt"><span class="n">3</span>가주어 it</div>
+    </div>
+    <div class="round">
+      <div class="rh"><span class="no">03<small>회</small></span><span class="theme">명사 꾸미기</span></div>
+      <a class="pt" href="block-writing/participle.html"><span class="n">1</span>분사 후치수식<span class="go">열기 ▶</span></a>
+      <div class="pt"><span class="n">2</span>주격 관계대명사</div>
+      <div class="pt"><span class="n">3</span>목적격 관계대명사</div>
+    </div>
+    <div class="round">
+      <div class="rh"><span class="no">04<small>회</small></span><span class="theme">절 넣기</span></div>
+      <div class="pt"><span class="n">1</span>명사절 that</div>
+      <div class="pt"><span class="n">2</span>관계대명사 what</div>
+      <div class="pt"><span class="n">3</span>간접의문문</div>
+    </div>
+  </div>
+</section>
+
+<section class="season">
+  <div class="shead"><span class="badge">시즌 2</span><h2>2월 · 여러 포인트가 섞인 문장 정복</h2><p>시즌 1 포인트를 섞어 쓰기</p></div>
+  <div class="grid s2">
+    <div class="round">
+      <div class="rh"><span class="no">05<small>회</small></span><span class="theme">뼈대 + 꾸밈</span></div>
+      <div class="mix"><span>1회</span><span>×</span><span>3회</span></div>
+      <div class="mixbox"><strong>혼합 문장 세트</strong>준비 중</div>
+    </div>
+    <div class="round">
+      <div class="rh"><span class="no">06<small>회</small></span><span class="theme">뼈대 + 절</span></div>
+      <div class="mix"><span>2회</span><span>×</span><span>4회</span></div>
+      <div class="mixbox"><strong>혼합 문장 세트</strong>준비 중</div>
+    </div>
+    <div class="round">
+      <div class="rh"><span class="no">07<small>회</small></span><span class="theme">실전 조건영작</span></div>
+      <div class="mix"><span>1~4회 전체</span></div>
+      <div class="mixbox"><strong>학교식 〈보기〉 영작 + 재진단</strong>준비 중</div>
+    </div>
+  </div>
+</section>
+<footer>밝은 칸을 누르면 수업 화면이 열려요. 점선 칸은 준비 중이에요.</footer>
+</div>
+</body>
+</html>
